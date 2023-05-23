@@ -36,6 +36,11 @@ namespace Trabajo_Practico___Kevin_Estrada
             InitializeComponent();
         }
 
+        public Button Config
+        {
+            get { return btn_administrarUsuarios; }
+            set { btn_administrarUsuarios= value; }
+        }
         private void Restaurante_Load(object sender, EventArgs e)
         {
             cargarComboBoxes();
@@ -46,7 +51,7 @@ namespace Trabajo_Practico___Kevin_Estrada
 
         private void btn_mesa1_Click(object sender, EventArgs e)
         {
-            if (listb_Productos.Items.Count > 0 && (txt_nombre.Text != null && txt_apellido != null && txt_comensales != null && txt_telefono != null))
+            if (listb_Productos.Items.Count > 0 && !string.IsNullOrWhiteSpace(txt_nombre.Text) && !string.IsNullOrWhiteSpace(txt_apellido.Text) && !string.IsNullOrWhiteSpace(txt_comensales.Text) && !string.IsNullOrWhiteSpace(txt_telefono.Text))
             {
                 foreach (Mesa item in mesas.Mesas)
                 {
@@ -55,21 +60,27 @@ namespace Trabajo_Practico___Kevin_Estrada
                     {
                         case "btn_mesa1":
                             completarMesa(item, 1);
+                            btn.Enabled = false;
                             break;
                         case "btn_mesa2":
                             completarMesa(item, 2);
+                            btn.Enabled = false;
                             break;
                         case "btn_mesa3":
                             completarMesa(item, 3);
+                            btn.Enabled = false;
                             break;
                         case "btn_mesa4":
                             completarMesa(item, 4);
+                            btn.Enabled = false;
                             break;
                         case "btn_mesa5":
                             completarMesa(item, 5);
+                            btn.Enabled = false;
                             break;
                         case "btn_mesa6":
                             completarMesa(item, 6);
+                            btn.Enabled = false;
                             break;
 
                     }
@@ -96,7 +107,35 @@ namespace Trabajo_Practico___Kevin_Estrada
             }
             
         }
-        
+
+        private void btn_limpiar_Click(object sender, EventArgs e)
+        {
+            List<Button> buttons = new List<Button>
+            {
+                btn_mesa1,
+                btn_mesa2,
+                btn_mesa3,
+                btn_mesa4,
+                btn_mesa5,
+                btn_mesa6
+            };
+
+            foreach (Mesa item in mesas.Mesas)
+            {
+                item.MesaDisponible = true;
+            }
+            foreach (Button item in buttons)
+            {
+                item.Enabled = true;
+            }
+
+            productos.Clear();
+            mesas.Mesas.Clear();
+            agregarMesas();
+            actualizarMesas();
+            
+        }
+
         private void cargarComboBoxes()
         {
             foreach (EPlato item in Enum.GetValues(typeof(EPlato)))
@@ -107,8 +146,10 @@ namespace Trabajo_Practico___Kevin_Estrada
             {
                 cmbBox_bebida.Items.Add(item);
             }
+
             cmbBox_comida.SelectedIndex = 0;
             cmbBox_bebida.SelectedIndex = 0;
+            
         }
 
         private void actualizarMesas()
@@ -181,13 +222,27 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             if(mesa.NumeroMesa==numeroMesa && mesa.MesaDisponible==true && productos.Count>0)
             {
-                mesa.Productos = productos;
+                mesa.Productos = new List<Producto>(productos);
                 mesa.Cliente = obtenerCliente();
                 mesa.MesaDisponible = false;
 
-                MessageBox.Show(mesa.Cliente.mostrar());
+                productos.Clear();
             }
                     
+        }
+
+        private void btn_cerrarRest_Click(object sender, EventArgs e)
+        {
+            mesas.CerrarDia();
+        }
+
+        private void btn_administrarUsuarios_Click(object sender, EventArgs e)
+        {
+            //Login loginAuxiliar = new Login();
+            AdministracionForm adm = new AdministracionForm();
+            //adm.administracionUsuarios = loginAuxiliar.Administracion;
+            adm.ShowDialog();
+            
         }
     }
 }

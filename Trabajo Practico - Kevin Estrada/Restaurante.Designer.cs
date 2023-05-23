@@ -51,6 +51,9 @@
             this.lbl_comensales = new System.Windows.Forms.Label();
             this.lbl_telefono = new System.Windows.Forms.Label();
             this.lbl_finalizar = new System.Windows.Forms.Label();
+            this.btn_limpiar = new System.Windows.Forms.Button();
+            this.btn_cerrarRest = new System.Windows.Forms.Button();
+            this.btn_administrarUsuarios = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_mesa1
@@ -134,6 +137,7 @@
             // 
             // cmbBox_comida
             // 
+            this.cmbBox_comida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBox_comida.FormattingEnabled = true;
             this.cmbBox_comida.Location = new System.Drawing.Point(75, 8);
             this.cmbBox_comida.Name = "cmbBox_comida";
@@ -142,6 +146,7 @@
             // 
             // cmbBox_bebida
             // 
+            this.cmbBox_bebida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBox_bebida.FormattingEnabled = true;
             this.cmbBox_bebida.Location = new System.Drawing.Point(75, 37);
             this.cmbBox_bebida.Name = "cmbBox_bebida";
@@ -256,6 +261,38 @@
             this.lbl_finalizar.TabIndex = 22;
             this.lbl_finalizar.Text = "Seleccione mesa para finalizar";
             // 
+            // btn_limpiar
+            // 
+            this.btn_limpiar.Location = new System.Drawing.Point(653, 33);
+            this.btn_limpiar.Name = "btn_limpiar";
+            this.btn_limpiar.Size = new System.Drawing.Size(100, 23);
+            this.btn_limpiar.TabIndex = 23;
+            this.btn_limpiar.Text = "Limpiar mesas";
+            this.btn_limpiar.UseVisualStyleBackColor = true;
+            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
+            // 
+            // btn_cerrarRest
+            // 
+            this.btn_cerrarRest.Location = new System.Drawing.Point(639, 419);
+            this.btn_cerrarRest.Name = "btn_cerrarRest";
+            this.btn_cerrarRest.Size = new System.Drawing.Size(102, 23);
+            this.btn_cerrarRest.TabIndex = 24;
+            this.btn_cerrarRest.Text = "Finalizar Día";
+            this.btn_cerrarRest.UseVisualStyleBackColor = true;
+            this.btn_cerrarRest.Click += new System.EventHandler(this.btn_cerrarRest_Click);
+            // 
+            // btn_administrarUsuarios
+            // 
+            this.btn_administrarUsuarios.Enabled = false;
+            this.btn_administrarUsuarios.Location = new System.Drawing.Point(604, 390);
+            this.btn_administrarUsuarios.Name = "btn_administrarUsuarios";
+            this.btn_administrarUsuarios.Size = new System.Drawing.Size(137, 23);
+            this.btn_administrarUsuarios.TabIndex = 25;
+            this.btn_administrarUsuarios.Text = "Administrar Usuarios";
+            this.btn_administrarUsuarios.UseVisualStyleBackColor = true;
+            this.btn_administrarUsuarios.Visible = false;
+            this.btn_administrarUsuarios.Click += new System.EventHandler(this.btn_administrarUsuarios_Click);
+            // 
             // Restaurante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -263,6 +300,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(753, 454);
+            this.Controls.Add(this.btn_administrarUsuarios);
+            this.Controls.Add(this.btn_cerrarRest);
+            this.Controls.Add(this.btn_limpiar);
             this.Controls.Add(this.lbl_finalizar);
             this.Controls.Add(this.lbl_telefono);
             this.Controls.Add(this.lbl_comensales);
@@ -286,6 +326,7 @@
             this.Controls.Add(this.btn_mesa2);
             this.Controls.Add(this.btn_mesa1);
             this.Name = "Restaurante";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Restaurante";
             this.Load += new System.EventHandler(this.Restaurante_Load);
             this.ResumeLayout(false);
@@ -317,5 +358,8 @@
         private Label lbl_comensales;
         private Label lbl_telefono;
         private Label lbl_finalizar;
+        private Button btn_limpiar;
+        private Button btn_cerrarRest;
+        private Button btn_administrarUsuarios;
     }
 }

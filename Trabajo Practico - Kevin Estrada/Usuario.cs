@@ -45,9 +45,18 @@ namespace Trabajo_Practico___Kevin_Estrada
             }
         }
 
+        /// <summary>
+        /// sobrecarga para poder crear un Usuario sin ningun valor
+        /// </summary>
+        public Usuario():this(string.Empty,string.Empty)
+        {
+
+        }
+
         public string Mail
         {
             get { return _mail; }
+            set { _mail = value; }
         }
         public bool esAdministrador
         {

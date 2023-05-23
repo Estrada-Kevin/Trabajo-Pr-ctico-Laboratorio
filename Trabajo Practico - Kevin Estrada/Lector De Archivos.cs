@@ -56,6 +56,11 @@ namespace Trabajo_Practico___Kevin_Estrada
                 
         }
 
+        public static void Sobreescribir(string path, string txtSobreescribir) 
+        {
+            File.WriteAllText(path, txtSobreescribir);
+        }
+
 
     }
 }

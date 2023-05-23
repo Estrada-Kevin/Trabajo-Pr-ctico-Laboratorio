@@ -52,6 +52,7 @@
             this.txt_contraseña.Name = "txt_contraseña";
             this.txt_contraseña.Size = new System.Drawing.Size(176, 23);
             this.txt_contraseña.TabIndex = 1;
+            this.txt_contraseña.UseSystemPasswordChar = true;
             // 
             // lbl_usuario
             // 
@@ -97,7 +98,7 @@
             this.btn_autoCompletar.UseVisualStyleBackColor = true;
             this.btn_autoCompletar.Click += new System.EventHandler(this.btn_autoCompletar_Click);
             // 
-            // Form1
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -113,7 +114,8 @@
             this.Controls.Add(this.txt_usuario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.TransparencyKey = System.Drawing.Color.Transparent;
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -112,6 +112,7 @@
             this.Controls.Add(this.lbl_agradecimiento);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Recibo";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Recibo";
             this.ResumeLayout(false);
             this.PerformLayout();

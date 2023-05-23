@@ -42,6 +42,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                     item.Contraseña = contraseña;
                 }
             }
+            EscribirUsuarios();
         }
 
         private void LeerUsuarios()
@@ -73,7 +74,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                 sb.AppendLine(linea);
             }
 
-            Lector_De_Archivos.Escribir(_path, sb.ToString());
+            Lector_De_Archivos.Sobreescribir(_path, sb.ToString());
         }
 
         

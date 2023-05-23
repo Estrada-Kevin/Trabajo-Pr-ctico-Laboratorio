@@ -14,7 +14,7 @@ namespace Trabajo_Practico___Kevin_Estrada
             Fideos = 12,
             Pizza = 15,
             Pancho = 8,
-            Choripan = 10,
+            Choripan = 11,
             Papas = 7
 
         }
@@ -22,7 +22,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         public enum EBebida
         {
             Coca = 4,
-            Sprite = 4,
+            Sprite = 5,
             ManaosDeUva = 1,
             Agua = 2,
             FernetConCoca = 6

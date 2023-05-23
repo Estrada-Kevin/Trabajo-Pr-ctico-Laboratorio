@@ -9,9 +9,6 @@ namespace Trabajo_Practico___Kevin_Estrada
         string directoryPath = AppContext.BaseDirectory + "usuarios.txt";
         Administracion administracion;
 
-        /// <summary>       
-        /// solo agregar funciones para manipular datos - y logica de como mostrar datos
-        /// </summary>
         public Login()
         {
             administracion = new Administracion(directoryPath);
@@ -23,26 +20,38 @@ namespace Trabajo_Practico___Kevin_Estrada
             
         }
 
+        public Administracion Administracion
+        {
+            get { return administracion; }
+            set { administracion = value; }
+        }
+
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            //AdministracionForm administracionForm = new AdministracionForm();
-            //administracionForm.administracionLista = administracion.Usuarios;
+            bool loginSatisfactorio = false;
 
             foreach (Usuario item in administracion.Usuarios)
             {
-                if(txt_usuario.Text == item.Mail && txt_contraseña.Text == item.Contraseña)
+                if (txt_usuario.Text == item.Mail && txt_contraseña.Text == item.Contraseña)
                 {
                     MessageBox.Show("Login satisfactorio");
-                    //administracionForm.Show();
                     Restaurante rest = new Restaurante();
+
+                    if (item.esAdministrador == true)
+                    {
+                        rest.Config.Visible = true;
+                        rest.Config.Enabled = true;
+                    }
+
                     rest.Show();
+                    loginSatisfactorio = true;
                     break;
                 }
-                else
-                {
-                    MessageBox.Show("Datos incorrectos");
-                    break;
-                }
+            }
+
+            if (!loginSatisfactorio)
+            {
+                MessageBox.Show("Datos incorrectos");
             }
         }
 
