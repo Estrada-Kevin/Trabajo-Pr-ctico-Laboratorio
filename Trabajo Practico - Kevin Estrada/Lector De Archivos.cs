@@ -15,20 +15,28 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <returns lista de strings> </returns>
         public static List<string> Leer(string path)
         {
-            List<string> lineas = new List<string>();
 
-            if(File.Exists(path))
+            List<string> lineas = new List<string>();
+            try
             {
-                using (StreamReader sr = new StreamReader(path))
+                if (File.Exists(path))
                 {
-                    string linea;
-                    while ((linea = sr.ReadLine()) != null)
+                    using (StreamReader sr = new StreamReader(path))
                     {
-                        lineas.Add(linea);  
+                        string linea;
+                        while ((linea = sr.ReadLine()) != null)
+                        {
+                            lineas.Add(linea);
+                        }
                     }
+
                 }
-                
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocurrio un error al leer archivo",ex.Message);
+            }
+            
             return lineas;   
         }
 
@@ -39,26 +47,47 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param string="txtAEscribir"></param>
         public static void Escribir(string path, string txtAEscribir)
         {
-            if(File.Exists(path))
+            try
             {
-                using (StreamWriter sw = new StreamWriter(path,true))
+                if (File.Exists(path))
                 {
-                    sw.WriteLine(txtAEscribir);
-                }   
-            }
-            else
-            {
-                using (StreamWriter sw = File.CreateText(path)) 
+                    using (StreamWriter sw = new StreamWriter(path, true))
+                    {
+                        sw.WriteLine(txtAEscribir);
+                    }
+                }
+                else
                 {
-                    sw.WriteLine(txtAEscribir);
+                    using (StreamWriter sw = File.CreateText(path))
+                    {
+                        sw.WriteLine(txtAEscribir);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocurrio un error al escribir archivo",ex.Message);
+            }
+            
                 
         }
 
+        /// <summary>
+        /// sobreescribe el archivo con los datos pasados como parametro
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="txtSobreescribir"></param>
         public static void Sobreescribir(string path, string txtSobreescribir) 
         {
-            File.WriteAllText(path, txtSobreescribir);
+            try
+            {
+                File.WriteAllText(path, txtSobreescribir);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al sobreescribir archivo", ex.Message);
+            }
+            
         }
 
 

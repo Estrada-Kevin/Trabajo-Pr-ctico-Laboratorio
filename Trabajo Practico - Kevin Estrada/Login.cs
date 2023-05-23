@@ -9,23 +9,21 @@ namespace Trabajo_Practico___Kevin_Estrada
         string directoryPath = AppContext.BaseDirectory + "usuarios.txt";
         Administracion administracion;
 
+        /// <summary>
+        /// constructor que abre directamente el archivo con los usuarios
+        /// </summary>
         public Login()
         {
             administracion = new Administracion(directoryPath);
             InitializeComponent();
         }
-        
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
 
-        public Administracion Administracion
-        {
-            get { return administracion; }
-            set { administracion = value; }
-        }
 
+        /// <summary>
+        /// si el usuario es correcto y coincide con la base de datos va a entrar, y si detecta que es admin hace funcionable el boton para dar alta/baja/modificacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
             bool loginSatisfactorio = false;
@@ -55,6 +53,11 @@ namespace Trabajo_Practico___Kevin_Estrada
             }
         }
 
+        /// <summary>
+        /// Metodo para autocompletar datos con un usuario admin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_autoCompletar_Click(object sender, EventArgs e)
         {
             Usuario user = administracion.Usuarios[0];

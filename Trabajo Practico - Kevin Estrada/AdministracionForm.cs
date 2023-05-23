@@ -3,6 +3,10 @@
     public partial class AdministracionForm : Form
     {
         private Administracion _administracionUsuarios;
+
+        /// <summary>
+        /// constructor vacio que obtiene los datos necesarios para funcionar desde el path
+        /// </summary>
         public AdministracionForm()
         {
             InitializeComponent();
@@ -15,11 +19,21 @@
             set { _administracionUsuarios = value; }
         }
 
+        /// <summary>
+        /// completa los datos necesarios al abrirse el form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AdministracionForm_Load(object sender, EventArgs e)
         {
             rellenarComboBox();
         }
 
+        /// <summary>
+        /// elimina un usuario al tocar el boton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_eliminarUsuario_Click(object sender, EventArgs e)
         {
             foreach (Usuario item in _administracionUsuarios.Usuarios)
@@ -41,11 +55,22 @@
 
         }
 
+        /// <summary>
+        /// sale del form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_salir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
+        /// <summary>
+        /// cambia la contraseña segun los datos que se le dan
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_cambiarContraseña_Click(object sender, EventArgs e)
         {
             foreach (Usuario item in _administracionUsuarios.Usuarios)
@@ -65,6 +90,12 @@
 
         }
 
+
+        /// <summary>
+        /// agrega un usuario tomando los datos desde el textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_agregarUsuario_Click(object sender, EventArgs e)
         {
             Usuario u = new Usuario();
@@ -83,18 +114,31 @@
                     u.esAdministrador = false;
                 }
 
-                _administracionUsuarios.AgregarUsuario(u);
+                DialogResult result = MessageBox.Show("Esta seguro que desea agregar este usuario?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                {
+                    if (result == DialogResult.Yes)
+                    {
+                        _administracionUsuarios.AgregarUsuario(u);
+                    }
+                }
+                
             }
             actualizarComboBox();
 
         }
 
+        /// <summary>
+        /// actualiza el combo box
+        /// </summary>
         private void actualizarComboBox()
         {
             cmbx_usuario.Items.Clear();
             rellenarComboBox();
         }
 
+        /// <summary>
+        /// usado para actualizar los combo box, rellena otra vez los combo box
+        /// </summary>
         private void rellenarComboBox()
         {
             foreach (Usuario item in _administracionUsuarios.Usuarios)

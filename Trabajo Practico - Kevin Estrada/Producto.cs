@@ -36,6 +36,12 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
 
         }
+
+        /// <summary>
+        /// constructor que asigna los valores de los parametros
+        /// </summary>
+        /// <param name="plato"></param>
+        /// <param name="bebida"></param>
         public Producto(EPlato plato, EBebida bebida):this()
         {
             _plato = plato;
@@ -52,6 +58,18 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             get { return _bebida; }
             set { _bebida = value; }
+        }
+
+        /// <summary>
+        /// devuelve un string con los datos
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"{Plato.ToString()} + {Bebida.ToString()}");
+
+            return sb.ToString();
         }
 
     }

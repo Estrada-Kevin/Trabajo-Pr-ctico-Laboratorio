@@ -33,7 +33,6 @@
             this.lbl_nombreCliente = new System.Windows.Forms.Label();
             this.lbl_costoFinal = new System.Windows.Forms.Label();
             this.listBox_detallesCompra = new System.Windows.Forms.ListBox();
-            this.btn_propina = new System.Windows.Forms.Button();
             this.btn_salir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -61,9 +60,10 @@
             // lbl_costoFinal
             // 
             this.lbl_costoFinal.AutoSize = true;
-            this.lbl_costoFinal.Location = new System.Drawing.Point(236, 224);
+            this.lbl_costoFinal.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_costoFinal.Location = new System.Drawing.Point(154, 217);
             this.lbl_costoFinal.Name = "lbl_costoFinal";
-            this.lbl_costoFinal.Size = new System.Drawing.Size(64, 15);
+            this.lbl_costoFinal.Size = new System.Drawing.Size(97, 25);
             this.lbl_costoFinal.TabIndex = 2;
             this.lbl_costoFinal.Text = "Costo final";
             this.lbl_costoFinal.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -77,18 +77,9 @@
             this.listBox_detallesCompra.Size = new System.Drawing.Size(311, 124);
             this.listBox_detallesCompra.TabIndex = 3;
             // 
-            // btn_propina
-            // 
-            this.btn_propina.Location = new System.Drawing.Point(12, 220);
-            this.btn_propina.Name = "btn_propina";
-            this.btn_propina.Size = new System.Drawing.Size(109, 23);
-            this.btn_propina.TabIndex = 4;
-            this.btn_propina.Text = "Dejar Propina";
-            this.btn_propina.UseVisualStyleBackColor = true;
-            // 
             // btn_salir
             // 
-            this.btn_salir.Location = new System.Drawing.Point(123, 220);
+            this.btn_salir.Location = new System.Drawing.Point(27, 220);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(107, 23);
             this.btn_salir.TabIndex = 5;
@@ -105,7 +96,6 @@
             this.ClientSize = new System.Drawing.Size(364, 251);
             this.ControlBox = false;
             this.Controls.Add(this.btn_salir);
-            this.Controls.Add(this.btn_propina);
             this.Controls.Add(this.listBox_detallesCompra);
             this.Controls.Add(this.lbl_costoFinal);
             this.Controls.Add(this.lbl_nombreCliente);
@@ -114,6 +104,7 @@
             this.Name = "Recibo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Recibo";
+            this.Load += new System.EventHandler(this.Recibo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,7 +116,6 @@
         private Label lbl_nombreCliente;
         private Label lbl_costoFinal;
         private ListBox listBox_detallesCompra;
-        private Button btn_propina;
         private Button btn_salir;
     }
 }
