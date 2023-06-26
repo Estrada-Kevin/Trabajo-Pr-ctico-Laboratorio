@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Trabajo_Practico___Kevin_Estrada
+﻿namespace Logica
 {
     public class Lector_De_Archivos
     {
@@ -34,10 +28,10 @@ namespace Trabajo_Practico___Kevin_Estrada
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Ocurrio un error al leer archivo",ex.Message);
+                Console.WriteLine("Ocurrio un error al leer archivo", ex.Message);
             }
-            
-            return lineas;   
+
+            return lineas;
         }
 
         /// <summary>
@@ -66,10 +60,10 @@ namespace Trabajo_Practico___Kevin_Estrada
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Ocurrio un error al escribir archivo",ex.Message);
+                Console.WriteLine("Ocurrio un error al escribir archivo", ex.Message);
             }
-            
-                
+
+
         }
 
         /// <summary>
@@ -77,7 +71,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// </summary>
         /// <param name="path"></param>
         /// <param name="txtSobreescribir"></param>
-        public static void Sobreescribir(string path, string txtSobreescribir) 
+        public static void Sobreescribir(string path, string txtSobreescribir)
         {
             try
             {
@@ -87,9 +81,7 @@ namespace Trabajo_Practico___Kevin_Estrada
             {
                 Console.WriteLine("Error al sobreescribir archivo", ex.Message);
             }
-            
+
         }
-
-
     }
 }

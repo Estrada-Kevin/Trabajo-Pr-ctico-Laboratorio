@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Practico___Kevin_Estrada
-{   
+namespace Logica
+{
     public class Producto
     {
         public enum EPlato
@@ -42,7 +42,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// </summary>
         /// <param name="plato"></param>
         /// <param name="bebida"></param>
-        public Producto(EPlato plato, EBebida bebida):this()
+        public Producto(EPlato plato, EBebida bebida) : this()
         {
             _plato = plato;
             _bebida = bebida;
@@ -71,6 +71,5 @@ namespace Trabajo_Practico___Kevin_Estrada
 
             return sb.ToString();
         }
-
     }
 }

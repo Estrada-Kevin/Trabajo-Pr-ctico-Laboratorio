@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Practico___Kevin_Estrada
+namespace Logica
 {
     public class ManejadorDeMesas
     {
@@ -23,12 +23,11 @@ namespace Trabajo_Practico___Kevin_Estrada
 
         public void CerrarDia()
         {
-
             int auxiliar = 0;
             StringBuilder sb = new StringBuilder();
             foreach (Mesa item in mesas)
             {
-                if(item!=null && item.Productos.Count>0)
+                if (item != null && item.Productos.Count > 0)
                 {
                     sb.AppendLine($"Mesa {item.NumeroMesa} -Ganancias: {item.CostoFinal}");
                     auxiliar += item.CostoFinal;

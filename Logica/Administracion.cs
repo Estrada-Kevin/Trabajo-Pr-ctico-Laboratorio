@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Practico___Kevin_Estrada
+namespace Logica
 {
     public class Administracion
     {
-      
         private List<Usuario> _usuarios;
         private string _path;
 
@@ -18,7 +17,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="path"></param>
         public Administracion(string path)
         {
-            _usuarios= new List<Usuario>();
+            _usuarios = new List<Usuario>();
             _path = path;
             LeerUsuarios();
         }
@@ -45,18 +44,18 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             _usuarios.Remove(usuario);
             EscribirUsuarios();
-        }   
+        }
 
         /// <summary>
         /// modifica la contraseña pasada como parametros comparando el usuario pasado como parametro 
         /// </summary>
         /// <param name="usuario"></param>
         /// <param name="contraseña"></param>
-        public void ModificarContraseñaUsuario(Usuario usuario,string contraseña)
+        public void ModificarContraseñaUsuario(Usuario usuario, string contraseña)
         {
             foreach (Usuario item in _usuarios)
             {
-                if(item==usuario)
+                if (item == usuario)
                 {
                     item.Contraseña = contraseña;
                 }
@@ -78,10 +77,10 @@ namespace Trabajo_Practico___Kevin_Estrada
                     bool auxiliar = false;
                     if (parametros[4] == "True")
                     {
-                        auxiliar= true;
+                        auxiliar = true;
                     }
 
-                    Usuario usuario = new Usuario(parametros[0],parametros[1],parametros[2],parametros[3],auxiliar);
+                    Usuario usuario = new Usuario(parametros[0], parametros[1], parametros[2], parametros[3], auxiliar);
                     _usuarios.Add(usuario);
                 }
             }
@@ -101,7 +100,5 @@ namespace Trabajo_Practico___Kevin_Estrada
 
             Lector_De_Archivos.Sobreescribir(_path, sb.ToString());
         }
-
-        
     }
 }

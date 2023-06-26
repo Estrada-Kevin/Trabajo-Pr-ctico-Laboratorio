@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Practico___Kevin_Estrada
+namespace Logica
 {
     public class Usuario : Persona
     {
         private string _mail;
         private string _contraseña;
-        private bool _esAdministrador;  
+        private bool _esAdministrador;
 
         /// <summary>
         /// constructor que hereda los atributos de personas
         /// </summary>
         /// <param name="nombre"></param>
         /// <param name="apellido"></param>
-        public Usuario(string nombre, string apellido):base(nombre, apellido)
+        public Usuario(string nombre, string apellido) : base(nombre, apellido)
         {
 
         }
@@ -31,11 +30,11 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="mail"></param>
         /// <param name="contraseña"></param>
         /// <param name="esAdministrador"></param>
-        public Usuario(string nombre, string apellido, string mail, string contraseña, bool esAdministrador):this(nombre,apellido)
+        public Usuario(string nombre, string apellido, string mail, string contraseña, bool esAdministrador) : this(nombre, apellido)
         {
             _mail = mail;
             _contraseña = contraseña;
-            if(esAdministrador == true)
+            if (esAdministrador == true)
             {
                 _esAdministrador = esAdministrador;
             }
@@ -48,7 +47,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <summary>
         /// sobrecarga para poder crear un Usuario sin ningun valor
         /// </summary>
-        public Usuario():this(string.Empty,string.Empty)
+        public Usuario() : this(string.Empty, string.Empty)
         {
 
         }
@@ -63,14 +62,14 @@ namespace Trabajo_Practico___Kevin_Estrada
             get { return _esAdministrador; }
             set { _esAdministrador = value; }
         }
-        
+
         public string Contraseña
         {
             get { return _contraseña; }
-            set { _contraseña = value; }    
+            set { _contraseña = value; }
         }
 
-        
+
         /// <summary>
         /// funcion que retorna un string con los atributos de la clase madre y la clase actual
         /// </summary>
@@ -80,7 +79,7 @@ namespace Trabajo_Practico___Kevin_Estrada
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(base.mostrar());
             sb.AppendLine($"Email: {_mail}");
-            
+
             return sb.ToString();
         }
 

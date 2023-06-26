@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Trabajo_Practico___Kevin_Estrada
+﻿namespace Logica
 {
     public class Mesa
     {
@@ -27,7 +21,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// constructor con solo el numero de mesa en caso de ser necesario
         /// </summary>
         /// <param name="numeroMesa"></param>
-        public Mesa(int numeroMesa):this()
+        public Mesa(int numeroMesa) : this()
         {
             _numeroMesa = numeroMesa;
         }
@@ -37,7 +31,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// </summary>
         /// <param name="numeroMesa"></param>
         /// <param name="cliente"></param>
-        public Mesa(int numeroMesa,Cliente cliente):this(numeroMesa)
+        public Mesa(int numeroMesa, Cliente cliente) : this(numeroMesa)
         {
             this.cliente = cliente;
         }
@@ -46,7 +40,9 @@ namespace Trabajo_Practico___Kevin_Estrada
         public List<Producto> Productos
         {
             get { return productos; }
-            set { if(value != null)
+            set
+            {
+                if (value != null)
                 {
                     productos = value;
                 }
@@ -69,6 +65,11 @@ namespace Trabajo_Practico___Kevin_Estrada
             set { _numeroMesa = value; }
         }
 
+        public override string ToString()
+        {
+            return "Mesa " + NumeroMesa.ToString();
+        }
+
 
         /// <summary>
         /// calcula el costo final
@@ -76,7 +77,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         public int CostoFinal
         {
 
-            get 
+            get
             {
                 costoFinal = 0;
                 if (productos != null)
@@ -89,9 +90,5 @@ namespace Trabajo_Practico___Kevin_Estrada
                 return costoFinal;
             }
         }
-
-        
-
-
     }
 }

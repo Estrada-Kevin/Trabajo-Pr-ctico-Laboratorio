@@ -1,4 +1,6 @@
-﻿namespace Trabajo_Practico___Kevin_Estrada
+﻿using Logica;
+
+namespace Trabajo_Practico___Kevin_Estrada
 {
     public partial class AdministracionForm : Form
     {

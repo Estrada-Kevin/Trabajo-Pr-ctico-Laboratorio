@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text;
+using Logica;
 
 namespace Trabajo_Practico___Kevin_Estrada
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Practico___Kevin_Estrada
+namespace Logica
 {
     public class Cliente : Persona
     {
@@ -21,17 +21,16 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="numeroMesa"></param>
         /// <param name="cantidadClientes"></param>
         /// <param name="numeroTelefono"></param>
-        public Cliente(string nombre, string apellido, int cantidadComensales, int numeroTelefono):base(nombre,apellido)
+        public Cliente(string nombre, string apellido, int cantidadComensales, int numeroTelefono) : base(nombre, apellido)
         {
             _cantidadComensales = cantidadComensales;
-            _numeroDeTelefono= numeroTelefono;
-            //_esMayorDeEdad= false;
+            _numeroDeTelefono = numeroTelefono;
         }
 
         public int NumeroDeTelefono
         {
             get { return _numeroDeTelefono; }
-            set { _numeroDeTelefono = value;}
+            set { _numeroDeTelefono = value; }
         }
 
         public int CantidadComensales
@@ -49,7 +48,7 @@ namespace Trabajo_Practico___Kevin_Estrada
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(base.mostrar());
             sb.AppendLine($"Cantidad de acompañantes: {_cantidadComensales}");
-            
+
 
             return sb.ToString();
         }

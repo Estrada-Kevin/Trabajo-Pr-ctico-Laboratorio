@@ -1,14 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static Trabajo_Practico___Kevin_Estrada.Producto;
+﻿using Logica;
+using static Logica.Producto;
 
 namespace Trabajo_Practico___Kevin_Estrada
 {
@@ -16,13 +7,6 @@ namespace Trabajo_Practico___Kevin_Estrada
     {
         ManejadorDeMesas mesas;
         List<Producto> productos;
-        Mesa m1;
-        Mesa m2;
-        Mesa m3;
-        Mesa m4;
-        Mesa m5;
-        Mesa m6;
-
 
         /// <summary>
         /// inicializa los atributos
@@ -31,17 +15,11 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             mesas = new ManejadorDeMesas();
             productos = new List<Producto>();
-            m1 = new Mesa(1);
-            m2 = new Mesa(2);
-            m3 = new Mesa(3);
-            m4 = new Mesa(4);
-            m5 = new Mesa(5);
-            m6 = new Mesa(6);
             InitializeComponent();
         }
 
         /// <summary>
-        /// necesari para que al hacer el login chequee si es admin o no
+        /// necesario para que al hacer el login chequee si es admin o no
         /// </summary>
         public Button Config
         {
@@ -57,60 +35,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         private void Restaurante_Load(object sender, EventArgs e)
         {
             cargarComboBoxes();
-            agregarMesas();
             actualizarMesas();
-            
-        }
-
-        /// <summary>
-        /// agrega la rden a la mesa
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_mesa1_Click(object sender, EventArgs e)
-        {
-
-            if (listb_Productos.Items.Count > 0 && !string.IsNullOrWhiteSpace(txt_nombre.Text) && !string.IsNullOrWhiteSpace(txt_apellido.Text) && !string.IsNullOrWhiteSpace(txt_comensales.Text) && !string.IsNullOrWhiteSpace(txt_telefono.Text))
-            {
-                Button btn = (Button)sender;
-                Mesa mesa = null;
-
-                switch (btn.Name)
-                {
-                    case "btn_mesa1":
-                        mesa = m1;
-                        break;
-                    case "btn_mesa2":
-                        mesa = m2;
-                        break;
-                    case "btn_mesa3":
-                        mesa = m3;
-                        break;
-                    case "btn_mesa4":
-                        mesa = m4;
-                        break;
-                    case "btn_mesa5":
-                        mesa = m5;
-                        break;
-                    case "btn_mesa6":
-                        mesa = m6;
-                        break;
-                }
-
-                if (mesa != null)
-                {
-                    Recibo recibo = new Recibo();
-                    completarMesa(mesa);
-                    recibo.Mesa = mesa; 
-                    recibo.ShowDialog();
-                    btn.Enabled = false;
-                    actualizarMesas();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos antes de asignar la orden a una mesa");
-            }
 
         }
 
@@ -121,8 +46,8 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="e"></param>
         private void btn_agregarPedido_Click(object sender, EventArgs e)
         {
-            
-            if(cmbBox_comida.SelectedItem != null && cmbBox_bebida != null )
+
+            if (cmbBox_comida.SelectedItem != null && cmbBox_bebida != null)
             {
                 EPlato plato = (EPlato)cmbBox_comida.SelectedItem;
                 EBebida bebida = (EBebida)cmbBox_bebida.SelectedItem;
@@ -130,7 +55,40 @@ namespace Trabajo_Practico___Kevin_Estrada
                 Producto p = new Producto(plato, bebida);
                 productos.Add(p);
             }
-            
+
+        }
+
+        /// <summary>
+        /// Agrega el pedido a la mesa seleccionada en el combobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_agregarPedidoALaMesa_Click(object sender, EventArgs e)
+        {
+
+            if (cmbBox_mesas.SelectedItem != null && (listb_Productos.Items.Count > 0 && !string.IsNullOrWhiteSpace(txt_nombre.Text) && !string.IsNullOrWhiteSpace(txt_apellido.Text) && !string.IsNullOrWhiteSpace(txt_comensales.Text) && !string.IsNullOrWhiteSpace(txt_telefono.Text)))
+            {
+                Mesa selectedMesa = (Mesa)cmbBox_mesas.SelectedItem;
+                if(selectedMesa.MesaDisponible)
+                {
+                    completarMesa(selectedMesa);
+                    mesas.Mesas.Add(selectedMesa);
+
+                    Recibo recibo = new Recibo();
+                    recibo.Mesa = selectedMesa;
+                    recibo.ShowDialog();
+                    actualizarMesas();
+                }
+                else
+                {
+                    MessageBox.Show("Mesa llena");
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Debe completar los datos antes de asignar la orden a una mesa");
+            }
         }
 
         /// <summary>
@@ -140,30 +98,15 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="e"></param>
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
-            List<Button> buttons = new List<Button>
-            {
-                btn_mesa1,
-                btn_mesa2,
-                btn_mesa3,
-                btn_mesa4,
-                btn_mesa5,
-                btn_mesa6
-            };
-
             foreach (Mesa item in mesas.Mesas)
             {
                 item.MesaDisponible = true;
             }
-            foreach (Button item in buttons)
-            {
-                item.Enabled = true;
-            }
 
             productos.Clear();
             mesas.Mesas.Clear();
-            agregarMesas();
             actualizarMesas();
-            
+
         }
 
         /// <summary>
@@ -172,6 +115,7 @@ namespace Trabajo_Practico___Kevin_Estrada
 
         private void cargarComboBoxes()
         {
+            int maxMesas = 6;
             foreach (EPlato item in Enum.GetValues(typeof(EPlato)))
             {
                 cmbBox_comida.Items.Add(item);
@@ -180,10 +124,15 @@ namespace Trabajo_Practico___Kevin_Estrada
             {
                 cmbBox_bebida.Items.Add(item);
             }
+            for (int i = 1; i <= maxMesas; i++)
+            {
+                cmbBox_mesas.Items.Add(new Mesa { NumeroMesa = i });
+            }
 
+            cmbBox_mesas.SelectedIndex = 0;
             cmbBox_comida.SelectedIndex = 0;
             cmbBox_bebida.SelectedIndex = 0;
-            
+
         }
 
 
@@ -192,66 +141,11 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// </summary>
         private void actualizarMesas()
         {
-            settearColor();
             listb_Productos.Items.Clear();
             txt_apellido.Clear();
             txt_nombre.Clear();
             txt_telefono.Clear();
             txt_comensales.Clear();
-        }
-
-        /// <summary>
-        /// agrega mesas a la lista que tiene como atributo
-        /// </summary>
-        private void agregarMesas()
-        {
-            mesas.Mesas.Add(m1);
-            mesas.Mesas.Add(m2);
-            mesas.Mesas.Add(m3);
-            mesas.Mesas.Add(m4);
-            mesas.Mesas.Add(m5);
-            mesas.Mesas.Add(m6);
-        }
-
-        /// <summary>
-        /// setea la configuracion de color para las mesas disponibles
-        /// </summary>
-        private void settearColor()
-        {
-            foreach (Mesa item in mesas.Mesas)
-            {
-                Button button = new Button();
-                switch (item.NumeroMesa)
-                {
-                    case 1:
-                        button = btn_mesa1;
-                        break;
-                    case 2:
-                        button = btn_mesa2;
-                        break;
-                    case 3:
-                        button = btn_mesa3;
-                        break;
-                    case 4:
-                        button = btn_mesa4;
-                        break;
-                    case 5:
-                        button = btn_mesa5;
-                        break;
-                    case 6:
-                        button = btn_mesa6;
-                        break;
-
-                }
-                if (item.MesaDisponible == true)
-                {
-                    button.BackColor = Color.Green;
-                }
-                else
-                {
-                    button.BackColor = Color.Red;
-                }
-            }
         }
 
 
@@ -263,8 +157,8 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             string nombre = txt_nombre.Text;
             string apellido = txt_apellido.Text;
-            int comensales = int.Parse(txt_comensales.Text);
-            int telefono = int.Parse(txt_telefono.Text);
+            int.TryParse(txt_comensales.Text, out int comensales);
+            int.TryParse(txt_telefono.Text, out int telefono);
 
             Cliente c = new Cliente(nombre, apellido, comensales, telefono);
             return c;
@@ -295,6 +189,12 @@ namespace Trabajo_Practico___Kevin_Estrada
         private void btn_cerrarRest_Click(object sender, EventArgs e)
         {
             mesas.CerrarDia();
+            DialogResult result = MessageBox.Show("Esta seguro que desea salir?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                MessageBox.Show("Archivo guardado.");
+                this.Close();
+            }
         }
 
 
@@ -307,7 +207,25 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             AdministracionForm adm = new AdministracionForm();
             adm.ShowDialog();
-            
+
+        }
+
+        private void btn_nuevaMesa_Click(object sender, EventArgs e)
+        {
+            int mesaNueva = cmbBox_mesas.Items.Count + 1;
+            cmbBox_mesas.Items.Add(new Mesa { NumeroMesa = mesaNueva });
+        }
+
+        private void btn_eliminarMesa_Click(object sender, EventArgs e)
+        {
+            if (cmbBox_mesas.Items.Count > 1)
+            {
+                cmbBox_mesas.Items.RemoveAt(cmbBox_mesas.Items.Count - 1);
+            }
+            else
+            {
+                MessageBox.Show("Tiene que haber por lo menos una mesa");
+            }
         }
     }
 }

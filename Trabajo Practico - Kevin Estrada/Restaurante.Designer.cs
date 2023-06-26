@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restaurante));
-            this.btn_mesa1 = new System.Windows.Forms.Button();
-            this.btn_mesa2 = new System.Windows.Forms.Button();
-            this.btn_mesa3 = new System.Windows.Forms.Button();
-            this.btn_mesa4 = new System.Windows.Forms.Button();
-            this.btn_mesa5 = new System.Windows.Forms.Button();
-            this.btn_mesa6 = new System.Windows.Forms.Button();
             this.btn_agregarPedido = new System.Windows.Forms.Button();
             this.listb_Productos = new System.Windows.Forms.ListBox();
             this.cmbBox_comida = new System.Windows.Forms.ComboBox();
@@ -54,67 +48,11 @@
             this.btn_limpiar = new System.Windows.Forms.Button();
             this.btn_cerrarRest = new System.Windows.Forms.Button();
             this.btn_administrarUsuarios = new System.Windows.Forms.Button();
+            this.cmbBox_mesas = new System.Windows.Forms.ComboBox();
+            this.btn_agregarPedidoALaMesa = new System.Windows.Forms.Button();
+            this.btn_nuevaMesa = new System.Windows.Forms.Button();
+            this.btn_eliminarMesa = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btn_mesa1
-            // 
-            this.btn_mesa1.Location = new System.Drawing.Point(138, 385);
-            this.btn_mesa1.Name = "btn_mesa1";
-            this.btn_mesa1.Size = new System.Drawing.Size(61, 57);
-            this.btn_mesa1.TabIndex = 0;
-            this.btn_mesa1.Text = "Mesa 1";
-            this.btn_mesa1.UseVisualStyleBackColor = false;
-            this.btn_mesa1.Click += new System.EventHandler(this.btn_mesa1_Click);
-            // 
-            // btn_mesa2
-            // 
-            this.btn_mesa2.Location = new System.Drawing.Point(205, 385);
-            this.btn_mesa2.Name = "btn_mesa2";
-            this.btn_mesa2.Size = new System.Drawing.Size(61, 57);
-            this.btn_mesa2.TabIndex = 1;
-            this.btn_mesa2.Text = "Mesa 2";
-            this.btn_mesa2.UseVisualStyleBackColor = false;
-            this.btn_mesa2.Click += new System.EventHandler(this.btn_mesa1_Click);
-            // 
-            // btn_mesa3
-            // 
-            this.btn_mesa3.Location = new System.Drawing.Point(272, 385);
-            this.btn_mesa3.Name = "btn_mesa3";
-            this.btn_mesa3.Size = new System.Drawing.Size(61, 57);
-            this.btn_mesa3.TabIndex = 2;
-            this.btn_mesa3.Text = "Mesa 3";
-            this.btn_mesa3.UseVisualStyleBackColor = false;
-            this.btn_mesa3.Click += new System.EventHandler(this.btn_mesa1_Click);
-            // 
-            // btn_mesa4
-            // 
-            this.btn_mesa4.Location = new System.Drawing.Point(339, 385);
-            this.btn_mesa4.Name = "btn_mesa4";
-            this.btn_mesa4.Size = new System.Drawing.Size(61, 57);
-            this.btn_mesa4.TabIndex = 3;
-            this.btn_mesa4.Text = "Mesa 4";
-            this.btn_mesa4.UseVisualStyleBackColor = false;
-            this.btn_mesa4.Click += new System.EventHandler(this.btn_mesa1_Click);
-            // 
-            // btn_mesa5
-            // 
-            this.btn_mesa5.Location = new System.Drawing.Point(406, 385);
-            this.btn_mesa5.Name = "btn_mesa5";
-            this.btn_mesa5.Size = new System.Drawing.Size(61, 57);
-            this.btn_mesa5.TabIndex = 4;
-            this.btn_mesa5.Text = "Mesa 5";
-            this.btn_mesa5.UseVisualStyleBackColor = false;
-            this.btn_mesa5.Click += new System.EventHandler(this.btn_mesa1_Click);
-            // 
-            // btn_mesa6
-            // 
-            this.btn_mesa6.Location = new System.Drawing.Point(473, 385);
-            this.btn_mesa6.Name = "btn_mesa6";
-            this.btn_mesa6.Size = new System.Drawing.Size(61, 57);
-            this.btn_mesa6.TabIndex = 5;
-            this.btn_mesa6.Text = "Mesa 6";
-            this.btn_mesa6.UseVisualStyleBackColor = false;
-            this.btn_mesa6.Click += new System.EventHandler(this.btn_mesa1_Click);
             // 
             // btn_agregarPedido
             // 
@@ -263,7 +201,7 @@
             // 
             // btn_limpiar
             // 
-            this.btn_limpiar.Location = new System.Drawing.Point(653, 33);
+            this.btn_limpiar.Location = new System.Drawing.Point(653, 58);
             this.btn_limpiar.Name = "btn_limpiar";
             this.btn_limpiar.Size = new System.Drawing.Size(100, 23);
             this.btn_limpiar.TabIndex = 23;
@@ -293,6 +231,44 @@
             this.btn_administrarUsuarios.Visible = false;
             this.btn_administrarUsuarios.Click += new System.EventHandler(this.btn_administrarUsuarios_Click);
             // 
+            // cmbBox_mesas
+            // 
+            this.cmbBox_mesas.FormattingEnabled = true;
+            this.cmbBox_mesas.Location = new System.Drawing.Point(75, 400);
+            this.cmbBox_mesas.Name = "cmbBox_mesas";
+            this.cmbBox_mesas.Size = new System.Drawing.Size(262, 23);
+            this.cmbBox_mesas.TabIndex = 26;
+            // 
+            // btn_agregarPedidoALaMesa
+            // 
+            this.btn_agregarPedidoALaMesa.Location = new System.Drawing.Point(357, 399);
+            this.btn_agregarPedidoALaMesa.Name = "btn_agregarPedidoALaMesa";
+            this.btn_agregarPedidoALaMesa.Size = new System.Drawing.Size(150, 24);
+            this.btn_agregarPedidoALaMesa.TabIndex = 27;
+            this.btn_agregarPedidoALaMesa.Text = "Agregar Pedido";
+            this.btn_agregarPedidoALaMesa.UseVisualStyleBackColor = true;
+            this.btn_agregarPedidoALaMesa.Click += new System.EventHandler(this.btn_agregarPedidoALaMesa_Click);
+            // 
+            // btn_nuevaMesa
+            // 
+            this.btn_nuevaMesa.Location = new System.Drawing.Point(653, 8);
+            this.btn_nuevaMesa.Name = "btn_nuevaMesa";
+            this.btn_nuevaMesa.Size = new System.Drawing.Size(100, 23);
+            this.btn_nuevaMesa.TabIndex = 28;
+            this.btn_nuevaMesa.Text = "Nueva mesa";
+            this.btn_nuevaMesa.UseVisualStyleBackColor = true;
+            this.btn_nuevaMesa.Click += new System.EventHandler(this.btn_nuevaMesa_Click);
+            // 
+            // btn_eliminarMesa
+            // 
+            this.btn_eliminarMesa.Location = new System.Drawing.Point(653, 33);
+            this.btn_eliminarMesa.Name = "btn_eliminarMesa";
+            this.btn_eliminarMesa.Size = new System.Drawing.Size(100, 23);
+            this.btn_eliminarMesa.TabIndex = 29;
+            this.btn_eliminarMesa.Text = "Eliminar Mesa";
+            this.btn_eliminarMesa.UseVisualStyleBackColor = true;
+            this.btn_eliminarMesa.Click += new System.EventHandler(this.btn_eliminarMesa_Click);
+            // 
             // Restaurante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -300,6 +276,10 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(753, 454);
+            this.Controls.Add(this.btn_eliminarMesa);
+            this.Controls.Add(this.btn_nuevaMesa);
+            this.Controls.Add(this.btn_agregarPedidoALaMesa);
+            this.Controls.Add(this.cmbBox_mesas);
             this.Controls.Add(this.btn_administrarUsuarios);
             this.Controls.Add(this.btn_cerrarRest);
             this.Controls.Add(this.btn_limpiar);
@@ -319,12 +299,6 @@
             this.Controls.Add(this.cmbBox_comida);
             this.Controls.Add(this.listb_Productos);
             this.Controls.Add(this.btn_agregarPedido);
-            this.Controls.Add(this.btn_mesa6);
-            this.Controls.Add(this.btn_mesa5);
-            this.Controls.Add(this.btn_mesa4);
-            this.Controls.Add(this.btn_mesa3);
-            this.Controls.Add(this.btn_mesa2);
-            this.Controls.Add(this.btn_mesa1);
             this.Name = "Restaurante";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Restaurante";
@@ -335,13 +309,6 @@
         }
 
         #endregion
-
-        private Button btn_mesa1;
-        private Button btn_mesa2;
-        private Button btn_mesa3;
-        private Button btn_mesa4;
-        private Button btn_mesa5;
-        private Button btn_mesa6;
         private Button btn_agregarPedido;
         private ListBox listb_Productos;
         private ComboBox cmbBox_comida;
@@ -361,5 +328,9 @@
         private Button btn_limpiar;
         private Button btn_cerrarRest;
         private Button btn_administrarUsuarios;
+        private ComboBox cmbBox_mesas;
+        private Button btn_agregarPedidoALaMesa;
+        private Button btn_nuevaMesa;
+        private Button btn_eliminarMesa;
     }
 }

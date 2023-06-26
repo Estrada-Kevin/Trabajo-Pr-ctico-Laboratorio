@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trabajo_Practico___Kevin_Estrada
+namespace Logica
 {
     public abstract class Persona
     {
@@ -51,6 +51,6 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             get { return _apellido; }
             set { _apellido = value; }
-        }   
+        }
     }
 }
