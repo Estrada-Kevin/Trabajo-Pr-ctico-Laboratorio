@@ -1,9 +1,11 @@
-﻿namespace Logica
+﻿using System.Text;
+
+namespace Logica
 {
     public class Mesa
     {
         private int _numeroMesa;
-        private List<Producto> productos;
+        private List<Producto<TPlato, TBebida>> productos;
         private Cliente cliente;
         private bool mesaDisponible;
         private int costoFinal;
@@ -13,7 +15,7 @@
         /// </summary>
         public Mesa()
         {
-            productos = new List<Producto>();
+            productos = new List<Producto<TPlato, TBebida>>();
             mesaDisponible = true;
         }
 
@@ -37,7 +39,7 @@
         }
 
 
-        public List<Producto> Productos
+        public List<Producto<TPlato,TBebida>> Productos
         {
             get { return productos; }
             set
@@ -82,13 +84,30 @@
                 costoFinal = 0;
                 if (productos != null)
                 {
-                    foreach (Producto item in productos)
+                    foreach (Producto<TPlato, TBebida> item in productos)
                     {
                         costoFinal += (int)item.Plato + (int)item.Bebida;
                     }
                 }
                 return costoFinal;
             }
+        }
+
+        public string informacionParaExportar()
+        {
+            return $"{mesaDisponible},{_numeroMesa},{CostoFinal}";
+        }
+
+        public string listaProductosAString()
+        {
+
+            List<string> productNames = new List<string>();
+            foreach (Producto<TPlato,TBebida> item in productos)
+            {
+                productNames.Add(item.ToString());
+            }
+
+            return string.Join(",", productNames);
         }
     }
 }

@@ -211,11 +211,11 @@
             // 
             // btn_cerrarRest
             // 
-            this.btn_cerrarRest.Location = new System.Drawing.Point(639, 419);
+            this.btn_cerrarRest.Location = new System.Drawing.Point(604, 419);
             this.btn_cerrarRest.Name = "btn_cerrarRest";
-            this.btn_cerrarRest.Size = new System.Drawing.Size(102, 23);
+            this.btn_cerrarRest.Size = new System.Drawing.Size(137, 23);
             this.btn_cerrarRest.TabIndex = 24;
-            this.btn_cerrarRest.Text = "Finalizar Día";
+            this.btn_cerrarRest.Text = "Calcular ganancias";
             this.btn_cerrarRest.UseVisualStyleBackColor = true;
             this.btn_cerrarRest.Click += new System.EventHandler(this.btn_cerrarRest_Click);
             // 

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
 
 namespace Logica
 {
-    public class Conexion
+    public interface IProducto<TPlato,TBebida>
     {
+        TPlato Plato { get; set; }
+        TBebida Bebida { get; set; }
     }
 }

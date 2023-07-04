@@ -1,17 +1,19 @@
-﻿using Logica;
+﻿using Conexion;
+using Logica;
 
 namespace Trabajo_Practico___Kevin_Estrada
 {
     public partial class AdministracionForm : Form
     {
         private Administracion _administracionUsuarios;
-
+        UsuariosSql usuarioSql;
         /// <summary>
         /// constructor vacio que obtiene los datos necesarios para funcionar desde el path
         /// </summary>
         public AdministracionForm()
         {
             InitializeComponent();
+            usuarioSql= new UsuariosSql();
             _administracionUsuarios = new Administracion(AppContext.BaseDirectory + "usuarios.txt");
         }
 
@@ -46,6 +48,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                     {
                         if (result == DialogResult.Yes)
                         {
+                            usuarioSql.EliminarUsuario(item);
                             _administracionUsuarios.RemoverUsuario(item);
                         }
                     }
@@ -84,6 +87,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                         if (result == DialogResult.Yes)
                         {
                             _administracionUsuarios.ModificarContraseñaUsuario(item, txt_contraseñaNueva.Text);
+                            usuarioSql.CambiarContraseña(item);
                         }
                     }
                 }
@@ -120,6 +124,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                 {
                     if (result == DialogResult.Yes)
                     {
+                        usuarioSql.AgregarUsuario(u);
                         _administracionUsuarios.AgregarUsuario(u);
                     }
                 }

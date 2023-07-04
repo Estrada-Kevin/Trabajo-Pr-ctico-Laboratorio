@@ -38,5 +38,21 @@ namespace Logica
             string path = AppContext.BaseDirectory + "mesas.txt";
             Lector_De_Archivos.Sobreescribir(path, sb.ToString());
         }
+
+        public string Finalizar()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("productos,nombre,apellido,cantidadComensales,numeroDeTelefono,MesaDisponible,numeroMesa,CostoFinal");
+            foreach (Mesa item in mesas)
+            {
+                if(item != null && item.Productos.Count > 0)
+                {
+                    sb.AppendLine($"{item.listaProductosAString()},{item.Cliente.informacionParaExportar()},{item.informacionParaExportar()}");
+                }
+            }
+
+            
+            return sb.ToString();
+        }
     }
 }

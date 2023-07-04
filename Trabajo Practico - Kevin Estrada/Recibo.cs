@@ -52,7 +52,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                 lbl_nombreCliente.Text = mesa.Cliente.Nombre + mesa.Cliente.Apellido;
                 lbl_costoFinal.Text = "Costo final: " + mesa.CostoFinal.ToString() + "US$";
 
-                foreach (Producto item in mesa.Productos)
+                foreach (Producto<TPlato, TBebida> item in mesa.Productos)
                 {
                     listBox_detallesCompra.Items.Add(item.ToString());
                 }

@@ -1,20 +1,21 @@
-﻿using Logica;
-using static Logica.Producto;
+﻿using Conexion;
+using Logica;
+using System.Text;
 
 namespace Trabajo_Practico___Kevin_Estrada
 {
     public partial class Restaurante : Form
     {
         ManejadorDeMesas mesas;
-        List<Producto> productos;
+        List<Producto<TPlato, TBebida>> productos;
 
         /// <summary>
         /// inicializa los atributos
         /// </summary>
-        public Restaurante()
+        public Restaurante(Usuario usuario)
         {
             mesas = new ManejadorDeMesas();
-            productos = new List<Producto>();
+            productos = new List<Producto<TPlato, TBebida>>();
             InitializeComponent();
         }
 
@@ -49,11 +50,15 @@ namespace Trabajo_Practico___Kevin_Estrada
 
             if (cmbBox_comida.SelectedItem != null && cmbBox_bebida != null)
             {
-                EPlato plato = (EPlato)cmbBox_comida.SelectedItem;
-                EBebida bebida = (EBebida)cmbBox_bebida.SelectedItem;
+                Mesa numeroMesa = (Mesa)cmbBox_mesas.SelectedItem;
+                TPlato plato = (TPlato)cmbBox_comida.SelectedItem;
+                TBebida bebida = (TBebida)cmbBox_bebida.SelectedItem;
                 listb_Productos.Items.Add(cmbBox_comida.SelectedItem.ToString() + " " + "+" + cmbBox_bebida.SelectedItem.ToString());
-                Producto p = new Producto(plato, bebida);
+                Producto<TPlato, TBebida> p = new Producto<TPlato, TBebida>(plato, bebida, numeroMesa.NumeroMesa);
                 productos.Add(p);
+
+                ProductoSql productoSql = new ProductoSql();
+                productoSql.AgregarProducto(p);
             }
 
         }
@@ -116,11 +121,11 @@ namespace Trabajo_Practico___Kevin_Estrada
         private void cargarComboBoxes()
         {
             int maxMesas = 6;
-            foreach (EPlato item in Enum.GetValues(typeof(EPlato)))
+            foreach (TPlato item in Enum.GetValues(typeof(TPlato)))
             {
                 cmbBox_comida.Items.Add(item);
             }
-            foreach (EBebida item in Enum.GetValues(typeof(EBebida)))
+            foreach (TBebida item in Enum.GetValues(typeof(TBebida)))
             {
                 cmbBox_bebida.Items.Add(item);
             }
@@ -159,8 +164,8 @@ namespace Trabajo_Practico___Kevin_Estrada
             string apellido = txt_apellido.Text;
             int.TryParse(txt_comensales.Text, out int comensales);
             int.TryParse(txt_telefono.Text, out int telefono);
-
-            Cliente c = new Cliente(nombre, apellido, comensales, telefono);
+            Mesa mesaAuxiliar = (Mesa)cmbBox_mesas.SelectedItem;
+            Cliente c = new Cliente(nombre, apellido, comensales, telefono, mesaAuxiliar.NumeroMesa);
             return c;
         }
 
@@ -173,9 +178,12 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             if (mesa.MesaDisponible == true && productos.Count > 0)
             {
-                mesa.Productos = new List<Producto>(productos);
+                mesa.Productos = new List<Producto<TPlato, TBebida>>(productos);
                 mesa.Cliente = obtenerCliente();
                 mesa.MesaDisponible = false;
+
+                ClienteSql clienteSql = new ClienteSql();
+                clienteSql.AgregarCliente(mesa.Cliente);
 
                 productos.Clear();
             }
@@ -189,12 +197,17 @@ namespace Trabajo_Practico___Kevin_Estrada
         private void btn_cerrarRest_Click(object sender, EventArgs e)
         {
             mesas.CerrarDia();
-            DialogResult result = MessageBox.Show("Esta seguro que desea salir?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                MessageBox.Show("Archivo guardado.");
-                this.Close();
-            }
+            Informes informes = new Informes(mesas);
+            informes.Show();
+
+            //DialogResult result = MessageBox.Show("Esta seguro que desea salir?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //if (result == DialogResult.Yes)
+            //{
+            //    MessageBox.Show("Archivo guardado.");
+            //    this.Close();
+            //}
+
+
         }
 
 
@@ -227,5 +240,6 @@ namespace Trabajo_Practico___Kevin_Estrada
                 MessageBox.Show("Tiene que haber por lo menos una mesa");
             }
         }
+
     }
 }

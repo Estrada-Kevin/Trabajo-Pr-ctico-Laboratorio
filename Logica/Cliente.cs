@@ -10,7 +10,8 @@ namespace Logica
     {
         private int _cantidadComensales;
         private int _numeroDeTelefono;
-        //private bool _esMayorDeEdad;
+        private int _numeroMesa;
+        
 
 
         /// <summary>
@@ -18,13 +19,12 @@ namespace Logica
         /// </summary>
         /// <param name="nombre"></param>
         /// <param name="apellido"></param>
-        /// <param name="numeroMesa"></param>
-        /// <param name="cantidadClientes"></param>
         /// <param name="numeroTelefono"></param>
-        public Cliente(string nombre, string apellido, int cantidadComensales, int numeroTelefono) : base(nombre, apellido)
+        public Cliente(string nombre, string apellido, int cantidadComensales, int numeroTelefono, int numeroMesa) : base(nombre, apellido)
         {
             _cantidadComensales = cantidadComensales;
             _numeroDeTelefono = numeroTelefono;
+            _numeroMesa= numeroMesa;
         }
 
         public int NumeroDeTelefono
@@ -37,6 +37,12 @@ namespace Logica
         {
             get { return _cantidadComensales; }
             set { _cantidadComensales = value; }
+        }
+
+        public int NumeroMesa
+        {
+            get { return _numeroMesa; }
+            set { _numeroMesa= value; }
         }
 
         /// <summary>
@@ -60,6 +66,11 @@ namespace Logica
         public override string ConseguirInformacionContacto()
         {
             return NumeroDeTelefono.ToString();
+        }
+
+        public string informacionParaExportar()
+        {
+            return $"{Nombre},{Apellido},{CantidadComensales},{NumeroDeTelefono},{NumeroMesa}";
         }
     }
 }
