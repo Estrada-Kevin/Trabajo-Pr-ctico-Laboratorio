@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Conexion\Conexion.csproj" />
     <ProjectReference Include="..\Logica\Logica.csproj" />
+    <ProjectReference Include="..\Logs\Logs.csproj" />
   </ItemGroup>
 
   <ItemGroup>

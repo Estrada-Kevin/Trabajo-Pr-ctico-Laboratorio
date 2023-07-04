@@ -1,6 +1,7 @@
 ﻿using Conexion;
 using Logica;
 using System.Text;
+using Logs;
 
 namespace Trabajo_Practico___Kevin_Estrada
 {
@@ -8,6 +9,7 @@ namespace Trabajo_Practico___Kevin_Estrada
     {
         ManejadorDeMesas mesas;
         List<Producto<TPlato, TBebida>> productos;
+        Logger logger;
 
         /// <summary>
         /// inicializa los atributos
@@ -16,6 +18,9 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             mesas = new ManejadorDeMesas();
             productos = new List<Producto<TPlato, TBebida>>();
+
+            logger = new Logger();
+            logger.Click += Logger_Click;
             InitializeComponent();
         }
 
@@ -223,12 +228,24 @@ namespace Trabajo_Practico___Kevin_Estrada
 
         }
 
+        /// <summary>
+        /// Crea una nueva lista en el cmb box de mesas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_nuevaMesa_Click(object sender, EventArgs e)
         {
             int mesaNueva = cmbBox_mesas.Items.Count + 1;
             cmbBox_mesas.Items.Add(new Mesa { NumeroMesa = mesaNueva });
         }
 
+
+
+        /// <summary>
+        /// elimina la ultima mesa agregada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_eliminarMesa_Click(object sender, EventArgs e)
         {
             if (cmbBox_mesas.Items.Count > 1)
