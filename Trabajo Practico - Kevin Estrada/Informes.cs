@@ -8,21 +8,38 @@ namespace Trabajo_Practico___Kevin_Estrada
     public partial class Informes : Form
     {
         ManejadorDeMesas mesas;
+        public event ManejadorDeBotones unClick;
+
+        /// <summary>
+        /// constructor que inicializa las mesas y subscribe al evento
+        /// </summary>
+        /// <param name="mesas"></param>
         public Informes(ManejadorDeMesas mesas)
         {
             this.mesas = mesas;
             InitializeComponent();
+            unClick += Delegado.ManejadorDeClicks;
         }
 
+        /// <summary>
+        /// boton para salir 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_salir_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Esta seguro que desea salir?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                this.Close();
+                Application.Exit();
             }
         }
 
+        /// <summary>
+        /// exporta los datos finales en un archivo csv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_csv_Click(object sender, EventArgs e)
         {
             string path = AppContext.BaseDirectory + "archivoCsv.csv";
@@ -30,6 +47,7 @@ namespace Trabajo_Practico___Kevin_Estrada
             {
                 File.WriteAllText(path, mesas.Finalizar());
                 MessageBox.Show("Exportado satisfactoriamente");
+                unClick?.Invoke(((Button)sender).Name);
             }
             else
             {
@@ -37,6 +55,12 @@ namespace Trabajo_Practico___Kevin_Estrada
             }
         }
 
+
+        /// <summary>
+        /// exporta los datos finales en un archivo JSON
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_json_Click(object sender, EventArgs e)
         {
             string path = AppContext.BaseDirectory + "archivoJson.json";
@@ -45,6 +69,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                 string jsonString = JsonSerializer.Serialize(mesas.Mesas);
                 File.WriteAllText(path, jsonString);
                 MessageBox.Show("Exportado satisfactoriamente");
+                unClick?.Invoke(((Button)sender).Name);
             }
             else
             {
@@ -53,6 +78,11 @@ namespace Trabajo_Practico___Kevin_Estrada
 
         }
 
+        /// <summary>
+        /// exporta los datos finales en un archivo PDF
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_PDF_Click(object sender, EventArgs e)
         {
             if(mesas.Mesas.Count>0)
@@ -79,7 +109,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                     document.Add(paragraph);
                     document.Add(new Paragraph(" "));
                 }
-
+                unClick?.Invoke(((Button)sender).Name);
                 document.Close();
                 writer.Close();
             }

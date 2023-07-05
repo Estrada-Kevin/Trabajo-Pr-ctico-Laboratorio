@@ -7,6 +7,7 @@ namespace Trabajo_Practico___Kevin_Estrada
     {
         private Administracion _administracionUsuarios;
         UsuariosSql usuarioSql;
+        public event ManejadorDeBotones unClick;
         /// <summary>
         /// constructor vacio que obtiene los datos necesarios para funcionar desde el path
         /// </summary>
@@ -31,6 +32,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         private void AdministracionForm_Load(object sender, EventArgs e)
         {
             rellenarComboBox();
+            unClick += Delegado.ManejadorDeClicks;
         }
 
         /// <summary>
@@ -50,9 +52,10 @@ namespace Trabajo_Practico___Kevin_Estrada
                         {
                             usuarioSql.EliminarUsuario(item);
                             _administracionUsuarios.RemoverUsuario(item);
+                            unClick?.Invoke(((Button)sender).Name);
                         }
                     }
-
+                    
                     break;
                 }
             }
@@ -88,6 +91,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                         {
                             _administracionUsuarios.ModificarContraseñaUsuario(item, txt_contraseñaNueva.Text);
                             usuarioSql.CambiarContraseña(item);
+                            unClick?.Invoke(((Button)sender).Name);
                         }
                     }
                 }
@@ -126,6 +130,7 @@ namespace Trabajo_Practico___Kevin_Estrada
                     {
                         usuarioSql.AgregarUsuario(u);
                         _administracionUsuarios.AgregarUsuario(u);
+                        unClick?.Invoke(((Button)sender).Name);
                     }
                 }
                 

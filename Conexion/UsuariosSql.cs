@@ -18,6 +18,10 @@ namespace Conexion
             listaUsuarios= new List<Usuario>();
         }
 
+        /// <summary>
+        /// trae la lista de usuarios de la base de datos y los transforma en datos usables
+        /// </summary>
+        /// <returns></returns>
         public List<Usuario> ObtenerUsuarios()
         {
             List<Usuario> listaAuxiliar = new List<Usuario>();
@@ -46,6 +50,11 @@ namespace Conexion
             return listaAuxiliar;
         }
 
+
+        /// <summary>
+        /// agrega un usuario a la base de datos
+        /// </summary>
+        /// <param name="usuario"></param>
         public void AgregarUsuario(Usuario usuario) 
         {
             string query = "INSERT INTO Usuarios (nombre, apellido, mail, contraseña, esAdministrador) VALUES (@nombre,@apellido,@mail,@contraseña,@esAdministrador)";
@@ -61,6 +70,11 @@ namespace Conexion
             EjecutarNonQuery(query, sqlParameter);
         }
 
+
+        /// <summary>
+        /// elimina un usuario de la base de datos
+        /// </summary>
+        /// <param name="usuario"></param>
         public void EliminarUsuario(Usuario usuario)
         {
             string query = "DELETE FROM Usuarios WHERE CAST(mail AS NVARCHAR(MAX)) = @mail";
@@ -71,6 +85,11 @@ namespace Conexion
             EjecutarNonQuery(query,sqlParameter);
         }
 
+
+        /// <summary>
+        /// modifica la contraseña de un usuario de la base de datos
+        /// </summary>
+        /// <param name="usuario"></param>
         public void CambiarContraseña(Usuario usuario)
         {
             string query = "UPDATE Usuarios SET contraseña = @contraseña WHERE CAST(mail AS NVARCHAR(MAX)) = @mail";

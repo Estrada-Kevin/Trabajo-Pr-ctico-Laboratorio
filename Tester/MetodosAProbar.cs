@@ -6,6 +6,9 @@ namespace Tester
     [TestClass]
     public class MetodosAProbar
     {
+        /// <summary>
+        /// chequea si obtiene usuarios, y chequea que el usuario no sea basura
+        /// </summary>
         [TestMethod]
         public void ObtenerUsuariosTest()
         {
@@ -27,6 +30,11 @@ namespace Tester
             Assert.IsTrue(listaUsuarios.Count() > 0);
             Assert.IsTrue(resultado);
         }
+
+
+        /// <summary>
+        /// chequea si se agrega correcatamente un usuario
+        /// </summary>
 
         [TestMethod]
         public void AgregarUsuarioTest()
@@ -51,6 +59,10 @@ namespace Tester
             Assert.IsTrue(resultado);
         }
 
+
+        /// <summary>
+        /// chequea si se elimina correcatemente un usuario
+        /// </summary>
         [TestMethod]
         public void EliminarUsuarioTest()
         {

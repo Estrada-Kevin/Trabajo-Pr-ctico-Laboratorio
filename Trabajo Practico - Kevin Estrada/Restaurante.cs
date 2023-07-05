@@ -1,15 +1,20 @@
 ﻿using Conexion;
 using Logica;
 using System.Text;
-using Logs;
+using System.Windows.Forms;
 
 namespace Trabajo_Practico___Kevin_Estrada
 {
+    /// <summary>
+    /// DELEGADO que tiene un string como parametro en este caso lo voy a usar para conseguir el nombre del boton
+    /// </summary>
+    /// <param name="nombreBoton"></param>
+    
     public partial class Restaurante : Form
     {
         ManejadorDeMesas mesas;
         List<Producto<TPlato, TBebida>> productos;
-        Logger logger;
+        public event ManejadorDeBotones unClick;
 
         /// <summary>
         /// inicializa los atributos
@@ -18,9 +23,8 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             mesas = new ManejadorDeMesas();
             productos = new List<Producto<TPlato, TBebida>>();
+            unClick += Delegado.ManejadorDeClicks;
 
-            logger = new Logger();
-            logger.Click += Logger_Click;
             InitializeComponent();
         }
 
@@ -42,6 +46,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         {
             cargarComboBoxes();
             actualizarMesas();
+            
 
         }
 
@@ -52,7 +57,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="e"></param>
         private void btn_agregarPedido_Click(object sender, EventArgs e)
         {
-
+            
             if (cmbBox_comida.SelectedItem != null && cmbBox_bebida != null)
             {
                 Mesa numeroMesa = (Mesa)cmbBox_mesas.SelectedItem;
@@ -64,6 +69,8 @@ namespace Trabajo_Practico___Kevin_Estrada
 
                 ProductoSql productoSql = new ProductoSql();
                 productoSql.AgregarProducto(p);
+
+                unClick?.Invoke(((Button)sender).Name);
             }
 
         }
@@ -75,7 +82,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="e"></param>
         private void btn_agregarPedidoALaMesa_Click(object sender, EventArgs e)
         {
-
+            
             if (cmbBox_mesas.SelectedItem != null && (listb_Productos.Items.Count > 0 && !string.IsNullOrWhiteSpace(txt_nombre.Text) && !string.IsNullOrWhiteSpace(txt_apellido.Text) && !string.IsNullOrWhiteSpace(txt_comensales.Text) && !string.IsNullOrWhiteSpace(txt_telefono.Text)))
             {
                 Mesa selectedMesa = (Mesa)cmbBox_mesas.SelectedItem;
@@ -88,6 +95,8 @@ namespace Trabajo_Practico___Kevin_Estrada
                     recibo.Mesa = selectedMesa;
                     recibo.ShowDialog();
                     actualizarMesas();
+
+                    unClick?.Invoke(((Button)sender).Name);
                 }
                 else
                 {
@@ -108,6 +117,7 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="e"></param>
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
+            unClick?.Invoke(((Button)sender).Name);
             foreach (Mesa item in mesas.Mesas)
             {
                 item.MesaDisponible = true;
@@ -201,17 +211,11 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="e"></param>
         private void btn_cerrarRest_Click(object sender, EventArgs e)
         {
+            unClick?.Invoke(((Button)sender).Name);
+
             mesas.CerrarDia();
             Informes informes = new Informes(mesas);
             informes.Show();
-
-            //DialogResult result = MessageBox.Show("Esta seguro que desea salir?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            //if (result == DialogResult.Yes)
-            //{
-            //    MessageBox.Show("Archivo guardado.");
-            //    this.Close();
-            //}
-
 
         }
 
@@ -224,8 +228,9 @@ namespace Trabajo_Practico___Kevin_Estrada
         private void btn_administrarUsuarios_Click(object sender, EventArgs e)
         {
             AdministracionForm adm = new AdministracionForm();
+            unClick?.Invoke(((Button)sender).Name);
             adm.ShowDialog();
-
+            
         }
 
         /// <summary>
@@ -235,6 +240,8 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="e"></param>
         private void btn_nuevaMesa_Click(object sender, EventArgs e)
         {
+            unClick?.Invoke(((Button)sender).Name);
+
             int mesaNueva = cmbBox_mesas.Items.Count + 1;
             cmbBox_mesas.Items.Add(new Mesa { NumeroMesa = mesaNueva });
         }
@@ -248,15 +255,20 @@ namespace Trabajo_Practico___Kevin_Estrada
         /// <param name="e"></param>
         private void btn_eliminarMesa_Click(object sender, EventArgs e)
         {
+            
+
             if (cmbBox_mesas.Items.Count > 1)
             {
                 cmbBox_mesas.Items.RemoveAt(cmbBox_mesas.Items.Count - 1);
+                unClick?.Invoke(((Button)sender).Name);
             }
             else
             {
                 MessageBox.Show("Tiene que haber por lo menos una mesa");
             }
         }
+
+        
 
     }
 }

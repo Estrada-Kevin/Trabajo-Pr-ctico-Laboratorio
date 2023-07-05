@@ -12,6 +12,11 @@ namespace Conexion
     {
         public ProductoSql() { }
 
+
+        /// <summary>
+        /// agrega un producto a la base de datos
+        /// </summary>
+        /// <param name="producto"></param>
         public void AgregarProducto(Producto<TPlato,TBebida> producto)
         {
             string insertQuery = "INSERT INTO Productos (numeroMesa, plato, bebida) VALUES (@numeroMesa, @plato, @bebida)";
